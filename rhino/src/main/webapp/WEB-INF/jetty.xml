@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="Server" class="org.eclipse.jetty.server.Server" init-method="start" destroy-method="stop">
+        <property name="stopAtShutdown" value="true"/>
+        <property name="connectors">
+            <list>
+                <bean id="Connector" class="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                    <property name="port" value="8383"/>
+                </bean>
+            </list>
+        </property>
+        <property name="handler">
+            <bean id="handler" class="org.eclipse.jetty.server.handler.StatisticsHandler">
+                <property name="handler">
+                    <bean id="handlers" class="org.eclipse.jetty.server.handler.HandlerCollection">
+                        <property name="handlers">
+                            <list>
+                                <bean class="org.eclipse.jetty.webapp.WebAppContext">
+                                    <property name="contextPath" value="/"/>
+                                    <property name="war" value="src/main/webapp"/>
+                                </bean>
+                                <ref bean="requestLogHandler"/>
+                            </list>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="requestLogHandler" class="org.eclipse.jetty.server.handler.RequestLogHandler"/>
+
+    <bean id="requestLog" class="org.eclipse.jetty.server.NCSARequestLog">
+        <constructor-arg name="filename" value="log/yyyy_mm_dd.request.log"/>
+        <property name="retainDays" value="90"/>
+        <property name="append" value="true"/>
+        <property name="extended" value="false"/>
+        <property name="LogTimeZone" value="GMT"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="requestLogHandler"/>
+        <property name="targetMethod" value="setRequestLog"/>
+        <property name="arguments">
+            <list>
+                <ref local="requestLog"/>
+            </list>
+        </property>
+    </bean>
+</beans>
