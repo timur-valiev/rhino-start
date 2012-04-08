@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 public class RhinoProcessor {
     private final static Logger logger = LoggerFactory.getLogger(RhinoProcessor.class);
 
-    public static String processScript(String script){
+    public static String processScript(String script, String alias, String json){
         Context cx = Context.enter();
         try
         {
             Scriptable scope = cx.initStandardObjects();
-
+            if (!alias.isEmpty()){
+                script = "var "+alias+" = " + json +";\n" + script;
+            }
             Object obj = cx.evaluateString( scope, script, "TestScript", 1, null );
             logger.info( "Object: " + obj );
             return obj.toString();

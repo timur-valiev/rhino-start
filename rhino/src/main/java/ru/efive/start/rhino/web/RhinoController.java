@@ -32,7 +32,7 @@ public class RhinoController {
         if (result.hasErrors()){
             modelAndView.addObject("result","Some errors");
         } else {
-            modelAndView.addObject("result", RhinoProcessor.processScript(form.getScript()));
+            modelAndView.addObject("result", RhinoProcessor.processScript(form.getScript(),form.getAlias(),form.getObject()));
         }
 
         return modelAndView;
