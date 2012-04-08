@@ -39,6 +39,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
         </property>
     </bean>
 
+    <bean id="contextApplicationContextProvider" class="ru.efive.start.rhino.context.ApplicationContextProvider"></bean>
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -48,12 +49,13 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
         <property name="password" value="${database.password}" />
     </bean>
 
+
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource"  ref="dataSource" />
         <property name="packagesToScan">
             <list>
-                <value>ru.hh.school.snatch.swebapp.domain</value>
+                <value>ru.efive.start.rhino.domain</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -70,7 +72,4 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
             <ref local="sessionFactory" />
         </property>
     </bean>
-
-
-
 </beans>
