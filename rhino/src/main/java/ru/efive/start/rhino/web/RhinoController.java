@@ -20,6 +20,11 @@ public class RhinoController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView strartPage() {
+        return new ModelAndView("redirect:/rhino");
+    }
+
     @RequestMapping(value = "/rhino/process", method = RequestMethod.POST)
     public ModelAndView processNewSnatchOrder(@Valid @ModelAttribute("rhinoform") RhinoForm form, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView("enterscript");

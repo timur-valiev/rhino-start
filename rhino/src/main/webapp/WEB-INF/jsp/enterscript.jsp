@@ -13,24 +13,43 @@
     <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span6 offset3">
+    <div class="container">
                 <div class="page-header">
                     <h2>Rhino script processor</h2>
                 </div>
-                <br>
-                Result: ${result}
+
                 <br>
                 <form:form modelAttribute="rhinoform" action="/rhino/process" method="post" class="well">
-                    <form:label path="script">Enter script</form:label>
-                    <form:textarea path="script" class="input-xlarge" style="height:400px;width:300px;"/>
-                    <form:errors path="script" cssClass="error" />
-                    <br>
-                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                    <table>
+                        <tr>
+                            <td>
+                                Result: ${result}
+                            </td>
+
+                            <td>
+                                <form:label path="alias">Enter objects alias</form:label>
+                                <form:input path="alias" class="input"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form:label path="script">Enter script</form:label>
+                                <form:textarea path="script" class="input-xlarge" style="height:400px;width:300px;"/>
+                                <form:errors path="script" cssClass="error" />
+                            </td>
+                            <td>
+                                <form:label path="object">Enter JSON</form:label>
+                                <form:textarea path="object" class="input-xlarge" style="height:400px;width:300px;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" value="Submit" class="btn btn-primary"/>
+                            </td>
+                        </tr>
+                    </table>
                 </form:form>
-            </div>
-        </div>
+
     </div>
 </body>
 </html>
