@@ -27,13 +27,7 @@ public class RhinoController {
         if (result.hasErrors()){
             modelAndView.addObject("result","Some errors");
         } else {
-            try {
-                modelAndView.addObject("result", RhinoProcessor.processScript(form.getScript()));
-            } catch (Exception e) {
-                modelAndView.addObject("result", e);
-            } catch (Error error){
-                modelAndView.addObject("result", error);
-            }
+            modelAndView.addObject("result", RhinoProcessor.processScript(form.getScript()));
         }
 
         return modelAndView;

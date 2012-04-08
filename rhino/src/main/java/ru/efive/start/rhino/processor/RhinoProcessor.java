@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 public class RhinoProcessor {
     private final static Logger logger = LoggerFactory.getLogger(RhinoProcessor.class);
 
-    public static Object processScript(String script) throws Exception {
+    public static String processScript(String script){
         Context cx = Context.enter();
         try
         {
@@ -16,15 +16,17 @@ public class RhinoProcessor {
 
             Object obj = cx.evaluateString( scope, script, "TestScript", 1, null );
             logger.info( "Object: " + obj );
-            Context.exit();
-            return obj;
-
+            return obj.toString();
         }
         catch( Exception e )
         {
             logger.warn("Cant eval script",e);
-            throw e;
+            return "Cant eval script"+e.toString();
+        }  catch (Error error){
+            logger.error("Some error while script processed:", error);
+            return "Some error while script processed :"+ error.toString();
+        } finally {
+            Context.exit();
         }
-
     }
 }
