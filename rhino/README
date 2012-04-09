@@ -1,0 +1,1 @@
+context.getBean(helper.getClass("ru.efive.start.rhino.context.ApplicationContextProvider"));

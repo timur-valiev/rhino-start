@@ -1,11 +1,14 @@
 package ru.efive.start.rhino.processor;
 
+import org.hibernate.SessionFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.efive.start.rhino.context.ApplicationContextProvider;
+import ru.efive.start.rhino.context.ContextHelper;
 
 public class RhinoProcessor {
     private final static Logger logger = LoggerFactory.getLogger(RhinoProcessor.class);
@@ -15,12 +18,13 @@ public class RhinoProcessor {
         try {
             Scriptable scope = cx.initStandardObjects();
 
-
             Object contextOut = Context.javaToJS(ApplicationContextProvider.getApplicationContext(), scope);
             ScriptableObject.putProperty(scope, "context", contextOut);
 
             Object jsOut = Context.javaToJS(System.out, scope);
             ScriptableObject.putProperty(scope, "out", jsOut);
+
+            ScriptableObject.putProperty(scope, "helper", Context.javaToJS(new ContextHelper(),scope));
 
             if (!alias.isEmpty()){
                 script = "var "+alias+" = " + json +";\n" + script;
