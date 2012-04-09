@@ -13,13 +13,14 @@
     <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <%@ include file="header.jsp" %>
+    <div class="container" align="center">
                 <div class="page-header">
-                    <h2>Rhino script processor</h2>
+                    <h2>${lang} script processor</h2>
                 </div>
 
                 <br>
-                <form:form modelAttribute="rhinoform" action="/rhino/process" method="post" class="well">
+                <form:form modelAttribute="scriptform" action="/${lang}/process" method="post" class="well">
                     <table>
                         <tr>
                             <td>
@@ -34,12 +35,12 @@
                         <tr>
                             <td>
                                 <form:label path="script">Enter script</form:label>
-                                <form:textarea path="script" class="input-xlarge" style="height:400px;width:300px;"/>
+                                <form:textarea path="script" class="input-xlarge" style="height:300px;width:300px;"/>
                                 <form:errors path="script" cssClass="error" />
                             </td>
                             <td>
                                 <form:label path="object">Enter JSON</form:label>
-                                <form:textarea path="object" class="input-xlarge" style="height:400px;width:300px;"/>
+                                <form:textarea path="object" class="input-xlarge" style="height:300px;width:300px;"/>
                             </td>
                         </tr>
                         <tr>

@@ -2,7 +2,7 @@ package ru.efive.start.rhino.web.forms;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class RhinoForm {
+public class ScriptForm {
     @NotBlank(message = "Blanck script!")
     public String script;
 
