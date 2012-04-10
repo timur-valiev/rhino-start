@@ -1,1 +1,2 @@
 context.getBean(helper.getClass("ru.efive.start.rhino.context.ApplicationContextProvider"));
+result = context.getBean(helper.getClass("ru.efive.start.rhino.facade.UserFacade")).getByEmail("t.vali@hh.ru");
