@@ -22,6 +22,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
     <context:component-scan base-package="ru.efive.start.rhino.web"/>
     <context:component-scan base-package="ru.efive.start.rhino.persistence" />
     <context:component-scan base-package="ru.efive.start.rhino.facade" />
+    <context:component-scan base-package="ru.efive.start.rhino.domain" />
+
+
 
     <mvc:annotation-driven/>
     <mvc:view-controller path="/" view-name="index"/>
@@ -40,7 +43,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
     </bean>
 
     <bean id="contextApplicationContextProvider" class="ru.efive.start.rhino.context.ApplicationContextProvider"></bean>
-    <!--
+
+    <tx:annotation-driven />
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}" />
@@ -72,5 +76,5 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
             <ref local="sessionFactory" />
         </property>
     </bean>
-    -->
+
 </beans>
