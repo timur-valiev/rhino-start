@@ -15,6 +15,12 @@
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:1.8.6" level="project" />
     <orderEntry type="library" name="Maven: org.python:jython-standalone:2.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.jruby:jruby-complete:1.6.7" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.clerezza.scala:script-engine:0.1-incubating" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-compiler:2.8.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.felix:org.apache.felix.scr.annotations:1.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.osgi:org.osgi.compendium:4.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.osgi:org.osgi.core:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:8.1.1.v20120215" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-continuation:8.1.1.v20120215" level="project" />

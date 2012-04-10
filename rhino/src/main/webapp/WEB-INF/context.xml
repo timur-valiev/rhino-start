@@ -44,6 +44,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
 
     <bean id="contextApplicationContextProvider" class="ru.efive.start.rhino.context.ApplicationContextProvider"></bean>
 
+    <bean id="engineManager" class="javax.script.ScriptEngineManager"></bean>
+
     <tx:annotation-driven />
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
