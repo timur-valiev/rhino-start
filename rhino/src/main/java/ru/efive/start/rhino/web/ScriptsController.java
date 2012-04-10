@@ -11,6 +11,8 @@ import ru.efive.start.rhino.processor.RhinoProcessor;
 import ru.efive.start.rhino.web.forms.ScriptForm;
 
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -38,6 +40,10 @@ public class ScriptsController {
 
     @RequestMapping(value = "/{lang}/process", method = RequestMethod.POST)
     public ModelAndView processNewSnatchOrder(@PathVariable("lang") String lang, @Valid @ModelAttribute("scriptform") ScriptForm form, BindingResult result) {
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("rhino");
+        engine = mgr.getEngineByName("jython");
+        engine = mgr.getEngineByName("jruby");
         ModelAndView modelAndView = new ModelAndView("enterscript");
         modelAndView.addObject("scriptform", form);
         modelAndView.addObject("lang",lang);
