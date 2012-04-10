@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 @Controller
 public class ScriptsController {
     @RequestMapping(value = "/{lang}", method = RequestMethod.GET)
-    public ModelAndView addSnatchOrder(@PathVariable("lang") String lang)  {
+    public ModelAndView getScriptUI(@PathVariable("lang") String lang)  {
         ModelAndView modelAndView = new ModelAndView("enterscript");
         modelAndView.addObject( "scriptform", new ScriptForm());
         modelAndView.addObject("lang",lang);
@@ -26,7 +26,7 @@ public class ScriptsController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView strartPage() {
+    public ModelAndView startPage() {
         return new ModelAndView("redirect:/rhino");
     }
 
