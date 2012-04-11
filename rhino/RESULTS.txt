@@ -1,0 +1,55 @@
+GETing engine x 100000 times: rhino:3872309952,jython:3829312163 jruby:3794263084, groovy:3815003641
+
+process simple script "x = 1; y=x+2; z=x*y;" : rhino: 5191073176, jython: 46122247880 , jruby: 12296378332, groovy:2955968705
+
+users.addUser("qwe@qwe.ru","blablabla");
+x = users.getByEmail("qwe@qwe.ru");
+users.deleteUser("qwe@qwe.ru");
+500times
+jruby: 18.893989246
+rhino: 17.251898032
+groovy: 15.813510013
+jython: 20.928002227
+
+users.deleteUser("qwe@qwe.ru");
+users.addUser("qwe@qwe.ru","blablabla");
+x = users.getByEmail("qwe@qwe.ru");
+for (i = 0;i<20;i++){
+  orders.addOrder("aaa","aaa","aa.ru","qwe@qwe.ru");
+}
+y = orders.getUsersOrder("qwe@qwe.ru");
+for (ord in y){
+orders.updateOrder(ord.getId(), ord.getProcessed()+1);
+}
+q=1;
+for (ord in y){
+q=q*(ord.getProcessed()-3);
+}
+
+orders.deleteOrders(x);
+users.deleteUser("qwe@qwe.ru");
+q;
+
+
+rhino: 29.59275485;
+groovy: 28.477698665
+jruby: 29.298228778
+
+script for jruby:
+$users.deleteUser("qwe@qwe.ru");
+$users.addUser("qwe@qwe.ru","blablabla");
+x = $users.getByEmail("qwe@qwe.ru");
+for i in 0..20 do $orders.addOrder("aaa","aaa","aa.ru","qwe@qwe.ru");
+end
+y = $orders.getUsersOrder("qwe@qwe.ru");
+for ord in y do
+$orders.updateOrder(ord.getId(), ord.getProcessed()+1);
+end
+q=1;
+for ord in y do
+q=q*(ord.getProcessed()-3);
+end
+
+$orders.deleteOrders(x);
+$users.deleteUser("qwe@qwe.ru");
+q;

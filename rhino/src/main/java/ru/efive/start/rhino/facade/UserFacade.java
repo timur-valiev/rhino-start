@@ -33,6 +33,12 @@ public class UserFacade {
     }
 
     @Transactional
+    public void deleteUser(String email) {
+        userRepository.deleteUser(email);
+    }
+
+
+    @Transactional
     public void addUser(String email, String pass) {
         try {
             userRepository.addUser(new User(email, pass));

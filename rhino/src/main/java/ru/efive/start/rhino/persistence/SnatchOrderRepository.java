@@ -40,4 +40,17 @@ public class SnatchOrderRepository {
         Query query = sessionFactory.getCurrentSession().createQuery(sqlQuery);
         return query.list();
     }
+
+    public void deleteSnatchOrder(long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery("delete from SnatchOrder where id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
+
+    public void deleteSnatchOrderList(User user) {
+        String sqlQuery = "delete from SnatchOrder where user = :user order by created desc";
+        Query query = sessionFactory.getCurrentSession().createQuery(sqlQuery);
+        query.setParameter("user", user);
+        query.executeUpdate();
+    }
 }

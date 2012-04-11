@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.efive.start.rhino.domain.User;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -31,5 +32,12 @@ public class UserRepository {
 
     public void updateUser(User user) {
         sessionFactory.getCurrentSession().update(user);
+    }
+
+    public void deleteUser(String email) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete from User where email = :email");
+        query.setParameter("email", email);
+        query.executeUpdate();
     }
 }

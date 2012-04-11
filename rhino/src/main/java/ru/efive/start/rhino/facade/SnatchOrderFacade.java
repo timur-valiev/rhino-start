@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.efive.start.rhino.domain.SnatchOrder;
+import ru.efive.start.rhino.domain.User;
 import ru.efive.start.rhino.persistence.SnatchOrderRepository;
 
 import java.util.Date;
@@ -50,4 +51,15 @@ public class SnatchOrderFacade {
         snatchOrder.setProcessed(processed);
         snatchOrderRepository.updateSnatchOrder(snatchOrder);
     }
+
+    @Transactional
+    public void deleteOrder(long id) {
+        snatchOrderRepository.deleteSnatchOrder(id);
+    }
+
+    @Transactional
+    public void deleteOrders(User user) {
+        snatchOrderRepository.deleteSnatchOrderList(user);
+    }
+
 }
