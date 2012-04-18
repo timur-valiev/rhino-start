@@ -2,6 +2,7 @@ package ru.efive.start.rhino.facade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.efive.start.rhino.domain.User;
 import ru.efive.start.rhino.persistence.UserRepository;
@@ -39,9 +40,10 @@ public class UserFacade {
 
 
     @Transactional
-    public void addUser(String email, String pass) {
+    public void addUser(String email, String pass){
         try {
             userRepository.addUser(new User(email, pass));
+            //throw new Exception("test2");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (UnsupportedEncodingException e) {

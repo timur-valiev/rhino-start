@@ -15,6 +15,7 @@ import ru.efive.start.rhino.web.forms.ScriptForm;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,6 +24,9 @@ import java.lang.reflect.Method;
 public class ScriptsController {
     @Autowired
     private ScriptEngineManager engineManager;
+
+    @Autowired
+    private ScriptProcessor scriptProcessor;
 
     @RequestMapping(value = "/{lang}", method = RequestMethod.GET)
     public ModelAndView getScriptUI(@PathVariable("lang") String lang)  {
@@ -54,9 +58,12 @@ public class ScriptsController {
         if (result.hasErrors()){
             modelAndView.addObject("result","Some errors");
         } else {
-            modelAndView.addObject("result",ScriptProcessor.processScript(engineManager.getEngineByName(lang), form.getScript(), form.getAlias(),form.getObject()));
+            try {
+                modelAndView.addObject("result", scriptProcessor.processScript(engineManager.getEngineByName(lang), form.getScript(), form.getAlias(),form.getObject()));
+            } catch (ScriptException e) {
+                modelAndView.addObject("result","Cant eval script"+e.toString());
+            }
         }
-
         return modelAndView;
     }
 

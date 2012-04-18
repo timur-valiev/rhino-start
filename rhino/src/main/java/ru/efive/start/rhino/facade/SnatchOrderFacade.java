@@ -58,8 +58,9 @@ public class SnatchOrderFacade {
     }
 
     @Transactional
-    public void deleteOrders(User user) {
-        snatchOrderRepository.deleteSnatchOrderList(user);
+    public void deleteOrders(User user) throws Exception {
+        throw new Exception("test");
+        //snatchOrderRepository.deleteSnatchOrderList(user);
     }
 
 }

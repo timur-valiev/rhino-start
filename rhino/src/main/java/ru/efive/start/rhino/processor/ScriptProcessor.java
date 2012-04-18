@@ -3,15 +3,26 @@ package ru.efive.start.rhino.processor;
 import org.mozilla.javascript.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.efive.start.rhino.context.ApplicationContextProvider;
 import ru.efive.start.rhino.context.ContextHelper;
+import ru.efive.start.rhino.facade.UserFacade;
 
 import javax.script.*;
 
+@Service
 public class ScriptProcessor {
     private final static Logger logger = LoggerFactory.getLogger(ScriptProcessor.class);
 
-    public static String processScript(ScriptEngine engine, String script, String alias, String json){
+    @Autowired
+    private UserFacade userFacade;
+
+    @Transactional(rollbackFor = Exception.class)
+    public String processScript(ScriptEngine engine, String script, String alias, String json) throws ScriptException {
         if (engine == null)
             return "engine not find!";
         try {
@@ -19,7 +30,6 @@ public class ScriptProcessor {
             for (int i=0;i<new Integer(alias);i++){
             ScriptContext newContext = new SimpleScriptContext();
             Bindings engineScope = newContext.getBindings(ScriptContext.ENGINE_SCOPE);
-
             engineScope.put("scope", ApplicationContextProvider.getApplicationContext());
             engineScope.put("helper", new ContextHelper());
             engineScope.put("users",ApplicationContextProvider.getApplicationContext().getBean(Class.forName("ru.efive.start.rhino.facade.UserFacade")));
@@ -36,7 +46,8 @@ public class ScriptProcessor {
         } catch (ScriptException e) {
         //}catch (Exception e) {
             logger.warn("Cant eval script",e);
-            return "Cant eval script"+e.toString();
+            throw e;
+            //return "Cant eval script"+e.toString();
         }  catch (Error error) {
             logger.error("Some error while script processed:", error);
             return "Some error while script processed :"+ error.toString();

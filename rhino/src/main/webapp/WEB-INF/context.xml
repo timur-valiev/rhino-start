@@ -23,6 +23,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
     <context:component-scan base-package="ru.efive.start.rhino.persistence" />
     <context:component-scan base-package="ru.efive.start.rhino.facade" />
     <context:component-scan base-package="ru.efive.start.rhino.domain" />
+    <context:component-scan base-package="ru.efive.start.rhino.processor" />
 
 
 
@@ -46,7 +47,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
 
     <bean id="engineManager" class="javax.script.ScriptEngineManager"></bean>
 
-    <tx:annotation-driven />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}" />
